@@ -22,7 +22,7 @@ public class GameLogic {
     }
 
     /**
-     * Forward method to board isAvailable method
+     * Check if a spot is free
      * @param spot a String representing the chosen spot
      * @return True if the spot is free, False otherwise
      */
