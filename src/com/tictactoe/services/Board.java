@@ -13,8 +13,8 @@ import java.util.*;
 public class Board {
 
     private static Character[] grid;
-    private static final Map<String, Integer> values = new HashMap<>();
-    private static final Map<Integer, List<String>> indexes = new HashMap<>();
+    private static final Map<Triples, Integer> values = new HashMap<>();
+    private static final Map<Integer, List<Triples>> indexes = new HashMap<>();
     private static Set<Character> validPlaces;
 
     public Board() {
@@ -32,27 +32,27 @@ public class Board {
     }
 
     private void initializeIndexes() {
-        indexes.put(1, new ArrayList<>(Arrays.asList("H1","V1","D1")));
-        indexes.put(2, new ArrayList<>(Arrays.asList("H1","V2")));
-        indexes.put(3, new ArrayList<>(Arrays.asList("H1","V3","D2")));
-        indexes.put(4, new ArrayList<>(Arrays.asList("H2","V1")));
-        indexes.put(5, new ArrayList<>(Arrays.asList("H2","V2","D1","D2")));
-        indexes.put(6, new ArrayList<>(Arrays.asList("H2","V3")));
-        indexes.put(7, new ArrayList<>(Arrays.asList("H3","V1","D2")));
-        indexes.put(8, new ArrayList<>(Arrays.asList("H3","V2")));
-        indexes.put(9, new ArrayList<>(Arrays.asList("H3","V3","D1")));
+        indexes.put(1, new ArrayList<>(Arrays.asList(Triples.H1,Triples.V1,Triples.D1)));
+        indexes.put(2, new ArrayList<>(Arrays.asList(Triples.H1,Triples.V2)));
+        indexes.put(3, new ArrayList<>(Arrays.asList(Triples.H1,Triples.V3,Triples.D2)));
+        indexes.put(4, new ArrayList<>(Arrays.asList(Triples.H2,Triples.V1)));
+        indexes.put(5, new ArrayList<>(Arrays.asList(Triples.H2,Triples.V2,Triples.D1,Triples.D2)));
+        indexes.put(6, new ArrayList<>(Arrays.asList(Triples.H2,Triples.V3)));
+        indexes.put(7, new ArrayList<>(Arrays.asList(Triples.H3,Triples.V1,Triples.D2)));
+        indexes.put(8, new ArrayList<>(Arrays.asList(Triples.H3,Triples.V2)));
+        indexes.put(9, new ArrayList<>(Arrays.asList(Triples.H3,Triples.V3,Triples.D1)));
     }
 
     private void fillValues() {
         values.clear(); // empty current Map, then fill with default values
-        values.put("H1",0);
-        values.put("H2",0);
-        values.put("H3",0);
-        values.put("V1",0);
-        values.put("V2",0);
-        values.put("V3",0);
-        values.put("D1",0);
-        values.put("D2",0);
+        values.put(Triples.H1,0);
+        values.put(Triples.H2,0);
+        values.put(Triples.H3,0);
+        values.put(Triples.V1,0);
+        values.put(Triples.V2,0);
+        values.put(Triples.V3,0);
+        values.put(Triples.D1,0);
+        values.put(Triples.D2,0);
     }
 
     /**
@@ -66,9 +66,9 @@ public class Board {
         int modifier = (symbol == 'X') ? 1 : -1;
 
         // retrieving the keys to change in the map
-        List<String> check = indexes.get(index);
+        List<Triples> check = indexes.get(index);
         // Cycling the list and changing values
-        for (String idx: check) {
+        for (Triples idx: check) {
             values.replace(idx, values.get(idx)+modifier);
         }
     }
@@ -99,7 +99,7 @@ public class Board {
      * Getter for values Map.
      * @return HashMap with values.
      */
-    public static Map<String, Integer> getValues() {
+    public static Map<Triples, Integer> getValues() {
         return values;
     }
 

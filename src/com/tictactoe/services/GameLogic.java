@@ -76,7 +76,7 @@ public class GameLogic {
      */
     public GameOverStates isGameOver() {
 
-        for (String k : Board.getValues().keySet()) {
+        for (Triples k : Board.getValues().keySet()) {
             if (Board.getValues().get(k) == 3) {
                 return GameOverStates.X_WIN;
             }

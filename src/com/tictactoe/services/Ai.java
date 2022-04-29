@@ -43,9 +43,9 @@ public class Ai {
      * @return a String representing the spot where the AI want to place its symbol or "N" if it cannot win.
      */
     private String tryToWin() {
-        for (String key: Board.getValues().keySet()) {
+        for (Triples key: Board.getValues().keySet()) {
             if (Board.getValues().get(key) == -2) {
-                int ans = computePosition(key);
+                int ans = checkIndex(key.indexes);
                 /* this check is necessary because -2 could be in two or three places like row / column / diagonal.
                    We have to determine which one is the right one with free spot.
                    -1 is what the AI will get if there is no spot in such row / column / diagonal. */
@@ -64,9 +64,9 @@ public class Ai {
      * @return a String representing the spot where the AI want to place its symbol or "N" if it doesn't have to block.
      */
     private String tryToStop() {
-        for (String key: Board.getValues().keySet()) {
+        for (Triples key: Board.getValues().keySet()) {
             if (Board.getValues().get(key) == 2) {
-                int ans = computePosition(key);
+                int ans = checkIndex(key.indexes);
                 /* this check is necessary because 2 could be in two or three places like row / column / diagonal.
                    We have to determine which one is the right one with free spot.
                    -1 is what the AI will get if there is no spot in such row / column / diagonal. */
@@ -89,44 +89,6 @@ public class Ai {
             ans = rand.nextInt(8)+1;
         }
         return Integer.toString(ans);
-    }
-
-    /**
-     * The AI choose which row / column / diagonal needs to check.
-     * Each switch option will call the appropriate checkIndex with the array of indexes that compose
-     * the row/column/diagonal.
-     * @param toCheck is a String representing Horizontal (H 1 to 3), Vertical (V 1 to 3) or Diagonal (D 1 to 2).
-     * @return -1 if there are no spot available, a number representing the free spot if available
-     */
-    private int computePosition(String toCheck) {
-        int ans = -1;
-        switch (toCheck) {
-            case "H1":
-                ans = checkIndex(new int[]{1, 2, 3});
-                break;
-            case "H2":
-                ans = checkIndex(new int[]{4, 5, 6});
-                break;
-            case "H3":
-                ans = checkIndex(new int[]{7, 8, 9});
-                break;
-            case "V1":
-                ans = checkIndex(new int[]{1, 4, 7});
-                break;
-            case "V2":
-                ans = checkIndex(new int[]{2, 5, 8});
-                break;
-            case "V3":
-                ans = checkIndex(new int[]{3, 6, 9});
-                break;
-            case "D1":
-                ans = checkIndex(new int[]{1, 5, 9});
-                break;
-            case "D2":
-                ans = checkIndex(new int[]{3, 5, 7});
-                break;
-        }
-        return ans;
     }
 
     /**
