@@ -29,16 +29,19 @@ public class ConsoleGame {
             if (player == 0) {
                 // player move block
                 while (true) {
-                    String move = human.moveConsole();
-                    if (gameLogic.isAvailable(move)) {
-                        gameLogic.recordMove(Integer.parseInt(move), 'X');
+                    String spot = human.moveConsole();
+                    if (gameLogic.isAvailable(spot)) {
+                        gameLogic.removeSpot(spot);
+                        gameLogic.recordMove(Integer.parseInt(spot), 'X');
                         break;
                     }
                     human.printPlacementError();
                 }
             } else {
                 // Ai move block
-                gameLogic.recordMove(Integer.parseInt(gameLogic.playAiTurn()), 'O');
+                String spot = gameLogic.playAiTurn();
+                gameLogic.removeSpot(spot);
+                gameLogic.recordMove(Integer.parseInt(spot), 'O');
             }
             // switch active player and print board
             player = (player == 0) ? 1 : 0;

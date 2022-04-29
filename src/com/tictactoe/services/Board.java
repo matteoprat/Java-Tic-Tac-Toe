@@ -88,6 +88,14 @@ public class Board {
     }
 
     /**
+     * Remove a spot
+     * @param spot is a String representing the spot we want to remove
+     */
+    public void removeSpot(String spot) {
+        validPlaces.remove(spot.charAt(0));
+    }
+
+    /**
      * Getter for values Map.
      * @return HashMap with values.
      */
@@ -101,5 +109,13 @@ public class Board {
      */
     public static Character[] getGrid() {
         return grid;
+    }
+
+    /**
+     * Getter for valid places
+     * @return a Set of Characters representing available spots
+     */
+    public static Set<Character> getValidPlaces() {
+        return validPlaces;
     }
 }

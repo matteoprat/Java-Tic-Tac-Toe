@@ -27,7 +27,15 @@ public class GameLogic {
      * @return True if the spot is free, False otherwise
      */
     public boolean isAvailable(String spot) {
-        return board.isAvailable(spot);
+        return Board.getValidPlaces().contains(spot.charAt(0));
+    }
+
+    /**
+     * Remove a value from the list of available spot
+     * @param spot represent the spot where player or Ai wants to place their symbol
+     */
+    public void removeSpot(String spot) {
+        board.removeSpot(spot);
     }
 
     /**

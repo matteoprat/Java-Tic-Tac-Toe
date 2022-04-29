@@ -104,18 +104,10 @@ public class GuiGame {
      */
     public void execMove (int n) {
         // increase number of moves played
+        gameLogic.removeSpot(Integer.toString(n));
         gameLogic.addMove();
 
-        char symbol = 'O';
-
-        /* The player need to update the Set, so he has to call the isAvailable method that will control the spot.
-        After the control it removes from the Set (see more documentation on Board class). Also change the symbol from O to X.
-         */
-
-        if (player == 0) {
-            gameLogic.isAvailable(Integer.toString(n));
-            symbol = 'X';
-        }
+        char symbol = (player == 0) ? 'X': 'O';
 
         // Change appearance of related button and disable it from further clicks.
         buttons.get(n-1).setEnabled(false);
